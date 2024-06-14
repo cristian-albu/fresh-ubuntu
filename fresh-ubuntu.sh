@@ -4,7 +4,7 @@
 sudo apt update
 sudo apt install -y curl wget gnupg software-properties-common apt-transport-https ca-certificates lsb-release gnupg2
 
-# Install vim
+# Install VIM
 sudo apt install vim
 
 # Install NVM and Node.js (latest version)
@@ -54,11 +54,16 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githu
 sudo apt update
 sudo apt install -y gh
 
-# Prompt for email for GitHub SSH key
-read -p "Enter your GitHub email: " email
+# Prompt for Git username and email
+read -p "Enter your Git username: " git_username
+read -p "Enter your Git email: " git_email
+
+# Set Git username and email
+git config --global user.name "$git_username"
+git config --global user.email "$git_email"
 
 # Generate SSH key for GitHub
-ssh-keygen -t ed25519 -C "$email"
+ssh-keygen -t ed25519 -C "$git_email"
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 
